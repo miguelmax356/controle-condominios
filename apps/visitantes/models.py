@@ -4,7 +4,7 @@ class Visitante(models.Model):
 
     STATUS_VISITANTE = [
         ("AGUARDANDO", "Aguardando autorização"),
-        ("EM VISITA", "Em visita"),
+        ("EM_VISITA", "Em visita"),
         ("FINALIZADO", "Visita finalizada")
     ]
 
@@ -97,6 +97,20 @@ class Visitante(models.Model):
     
         return "Veiculo não registrado"
     
+    def get_cpf(self):                                 #função d formatação de CPF
+        if self.cpf:                                        #Verificar atributo CPF
+            cpf = str(self.cpf)                        #Variavel que recebe informação em string do python
+
+            cpf_parte_um = cpf[0:3]             #recorte da primeira até a terceira posição
+            cpf_parte_dois = cpf[3:6]           #recorte da quarta até a sexta posição
+            cpf_parte_tres = cpf[6:9]           # recorte da setima a nona posição
+            cpf_parte_quatro = cpf[9:]          #recorte depois do traço que são os dois ultimos numeros
+
+            # String literal 
+            cpf_formatado = f"{cpf_parte_um}.{cpf_parte_dois}.{cpf_parte_tres}.{cpf_parte_quatro}"  
+
+            return cpf_formatado # retornar oa variavel cpf_formatado 
+
 
     class Meta:
         verbose_name= "Visitante"
